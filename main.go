@@ -1,9 +1,10 @@
 package main
 
 import (
-	"./config"
 	"github.com/sirupsen/logrus"
+	"github.com/ralmn/go-git-sync/config"
 )
+
 
 func main(){
 
