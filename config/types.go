@@ -10,7 +10,11 @@ type repository struct {
 }
 
 type Mirror struct {
-	Name    string `toml:"name"`
-	Remote  string `toml:"remote"`
-	SSH_KEY string `toml:"ssh_key"`
+	Name       string `toml:"name"`
+	Remote     string `toml:"remote"`
+	AuthMode   string `toml:"auth_mode"`
+	SSHKey     string `toml:"ssh_key"`
+	Passphrase string `toml:"passphrase"`
+	User string `toml:"user"`
+	Password string `toml:"password"`
 }

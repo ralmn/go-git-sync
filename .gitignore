@@ -16,3 +16,4 @@
 config.toml
 .idea/
 go-git-sync
+bares/
