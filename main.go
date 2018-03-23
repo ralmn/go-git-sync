@@ -24,16 +24,17 @@ func main() {
 	for _, repo := range config.Config.Repositories {
 		logrus.Infof("Detected repo %s with %d mirrors", repo.Name, len(repo.Mirrors))
 
-		repository := repositories.Repository{Name: repo.Name, Mirrors: repo.Mirrors}
+		repository := repositories.Repository{Name: repo.Name, Mirrors: repo.Mirrors, Token:repo.Token}
 		repository.TryToFirstClone()
 		repository.SetupRemotes()
 		repos[repo.Name] = repository
-
 	}
 
 	InitWeb()
 
 }
+
+
 
 func InitWeb() {
 	router := mux.NewRouter().StrictSlash(false)
@@ -43,6 +44,9 @@ func InitWeb() {
 
 func webhookPush(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
+
+	secretToken := req.URL.Query().Get("secret")
+
 	repositoryName := vars["repoName"]
 	remoteName := vars["remoteName"]
 
@@ -50,6 +54,12 @@ func webhookPush(res http.ResponseWriter, req *http.Request) {
 	if !ok {
 		res.WriteHeader(http.StatusNotFound)
 		fmt.Fprintf(res, "Repository '%s' not found", repositoryName)
+		return
+	}
+
+	if secretToken != repo.Token {
+		res.WriteHeader(403)
+		fmt.Fprintf(res,"Secret token no valid")
 		return
 	}
 

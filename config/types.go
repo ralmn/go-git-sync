@@ -7,6 +7,7 @@ type Configuration struct {
 type repository struct {
 	Name    string   `toml:"name"`
 	Mirrors []Mirror `toml:"mirror"`
+	Token   string   `toml:"token"`
 }
 
 type Mirror struct {

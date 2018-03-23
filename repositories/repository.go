@@ -17,6 +17,7 @@ import (
 
 type Repository struct {
 	Name          string
+	Token         string
 	BareDirectory string
 	Mirrors       []config.Mirror
 	mirrorsMaps map[string]config.Mirror
