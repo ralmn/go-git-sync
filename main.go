@@ -37,7 +37,7 @@ func main() {
 
 func InitWeb() {
 	router := mux.NewRouter().StrictSlash(false)
-	router.HandleFunc("/webook/push/{repoName}/{remoteName}", webhookPush)
+	router.HandleFunc("/webhook/push/{repoName}/{remoteName}", webhookPush)
 	logrus.Fatal(http.ListenAndServe(":8080", router))
 }
 
