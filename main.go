@@ -12,9 +12,12 @@ import (
 
 var repos map[string]repositories.Repository
 
+var version string
+
 func main() {
 
-	logrus.Info("Initializing Git Sync...")
+
+	logrus.Infof("Initializing Git Sync (version : %s)...", version)
 
 	repos = map[string]repositories.Repository{}
 

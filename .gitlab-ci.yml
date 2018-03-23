@@ -5,24 +5,22 @@ image: docker:latest
 variables:
  DOCKER_DRIVER: overlay2
 
-services:
-- docker:dind
 
 stages:
   - build
-  - deploy
+  - clean
 
 
 build:
   stage: build
-  image: docker:latest
-  services:
-    - docker:dind
   script:
     - ls
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" "$DOCKER_REGISTRY_HOST" --password-stdin
-    - docker build -t $DOCKER_REGISTRY_HOST/ralmn/go-git-sync .
-    - docker commit $DOCKER_REGISTRY_HOST/ralmn/go-git-sync $DOCKER_REGISTRY_HOST/ralmn/go-git-sync:$CI_PIPELINE_ID
+    - export APP_VERSION=$(cat version)
+    - echo $APP_VERSION
+    - echo $DOCKER_REGISTRY_PASSWORD | docker login -u "$DOCKER_REGISTRY_USER" "$DOCKER_REGISTRY_HOST" --password-stdin
+    - docker build --build-arg APP_VERSION=$APP_VERSION -t $DOCKER_REGISTRY_HOST/ralmn/go-git-sync .
+    - docker tag $DOCKER_REGISTRY_HOST/ralmn/go-git-sync $DOCKER_REGISTRY_HOST/ralmn/go-git-sync:$APP_VERSION
     - docker push $DOCKER_REGISTRY_HOST/ralmn/go-git-sync
-    - docker push $DOCKER_REGISTRY_HOST/ralmn/go-git-sync:$CI_PIPELINE_ID
-
+    - docker push $DOCKER_REGISTRY_HOST/ralmn/go-git-sync:$APP_VERSION
+    - docker rmi $DOCKER_REGISTRY_HOST/ralmn/go-git-sync
+    - docker rmi $DOCKER_REGISTRY_HOST/ralmn/go-git-sync:$APP_VERSION
