@@ -57,12 +57,18 @@
   version = "0.4"
 
 [[projects]]
-  digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
-  name = "github.com/konsorten/go-windows-terminal-sequences"
-  packages = ["."]
+  digest = "1:860a44307daedc81a42341b4739a24de918a81c915761af0b960d0df8a6f19ba"
+  name = "github.com/magefile/mage"
+  packages = [
+    "internal",
+    "mage",
+    "mg",
+    "parse",
+    "sh",
+  ]
   pruneopts = "UT"
-  revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
-  version = "v1.0.2"
+  revision = "07afc7d24f4d6d6442305d49552f04fbda5ccb3e"
+  version = "v1.11.0"
 
 [[projects]]
   branch = "master"
@@ -89,12 +95,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:05eebdd5727fea23083fce0d98d307d70c86baed644178e81608aaa9f09ea469"
+  digest = "1:62d5f89cd56e591a9b736a81041c13e5d51687a066f8a7d14353bae71c66b62c"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
   pruneopts = "UT"
-  revision = "60c74ad9be0d874af0ab0daef6ab07c5c5911f0d"
-  version = "v1.6.0"
+  revision = "d59e5619da7b597f81da5b56ba4f315daba0a667"
+  version = "v1.8.0"
 
 [[projects]]
   digest = "1:3681df693b35e7df9937dbd54b9f179aee5b54f4a28f72ad191e87038e6ffcab"
